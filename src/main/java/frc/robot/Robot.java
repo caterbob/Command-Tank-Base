@@ -7,15 +7,23 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import java.util.function.Supplier;
 
 public class Robot extends TimedRobot {
 
   private final TankDrive tank = new TankDrive();
-
-  //tank.setDefaultCommand()
+  private final DriverInput input = new DriverInput();
 
   @Override
   public void robotInit() {
+
+    // coding style?
+    tank.setDefaultCommand(
+      tank.drive(
+        () -> input.driveX(), 
+        () -> input.driveY())
+    );
+
   }
 
   @Override
